@@ -1,6 +1,6 @@
 {
   "name": "windows-api-show-window",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Call ShowWindow from node via .NET",
   "main": "src/index.js",
   "dependencies": {
