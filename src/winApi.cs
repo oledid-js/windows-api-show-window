@@ -19,7 +19,6 @@ public class Startup
 			case "ShowWindow": {
 				var hWnd = (int)payload.hwnd;
 				var nCmdShow = (int)payload.ncmdshow;
-				Task.
 				ShowWindow(hWnd, nCmdShow);
 				return null;
 			}
