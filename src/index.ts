@@ -89,52 +89,42 @@ export enum ShowWindowArgs {
 
 
 export function hideCurrentProcessWindow(): Promise<any> {
-	return new Promise((resolve, reject) => {
-		return winApiGetHwndFromPid()
-			.then(hWnd => {
-				return winApiShowWindow(hWnd, ShowWindowArgs.SW_HIDE);
-			})
-	});
+	return winApiGetHwndFromPid()
+		.then(hWnd => {
+			return winApiShowWindow(hWnd, ShowWindowArgs.SW_HIDE);
+		});
 }
 
 
 export function showCurrentProcessWindow(): Promise<any> {
-	return new Promise((resolve, reject) => {
-		return winApiGetHwndFromPid()
-			.then(hWnd => {
-				return winApiShowWindow(hWnd, ShowWindowArgs.SW_SHOW);
-			})
-	});
+	return winApiGetHwndFromPid()
+		.then(hWnd => {
+			return winApiShowWindow(hWnd, ShowWindowArgs.SW_SHOW);
+		})
 }
 
 
 export function minimizeCurrentProcessWindow(): Promise<any> {
-	return new Promise((resolve, reject) => {
-		return winApiGetHwndFromPid()
-			.then(hWnd => {
-				return winApiShowWindow(hWnd, ShowWindowArgs.SW_MINIMIZE);
-			})
-	});
+	return winApiGetHwndFromPid()
+		.then(hWnd => {
+			return winApiShowWindow(hWnd, ShowWindowArgs.SW_MINIMIZE);
+		})
 }
 
 
 export function maximizeCurrentProcessWindow(): Promise<any> {
-	return new Promise((resolve, reject) => {
-		return winApiGetHwndFromPid()
-			.then(hWnd => {
-				return winApiShowWindow(hWnd, ShowWindowArgs.SW_RESTORE);
-			})
-	});
+	return winApiGetHwndFromPid()
+		.then(hWnd => {
+			return winApiShowWindow(hWnd, ShowWindowArgs.SW_MAXIMIZE);
+		})
 }
 
 
 export function restoreCurrentProcessWindow(): Promise<any> {
-	return new Promise((resolve, reject) => {
-		return winApiGetHwndFromPid()
-			.then(hWnd => {
-				return winApiShowWindow(hWnd, ShowWindowArgs.SW_MAXIMIZE);
-			})
-	});
+	return winApiGetHwndFromPid()
+		.then(hWnd => {
+			return winApiShowWindow(hWnd, ShowWindowArgs.SW_RESTORE);
+		})
 }
 
 
@@ -172,8 +162,9 @@ export function winApiShowWindow(hWnd: number, nCmdShow: ShowWindowArgs): Promis
 		}, error => {
 			if (error) {
 				reject(error);
+				return;
 			}
+			resolve();
 		});
-		resolve();
 	});
 }
