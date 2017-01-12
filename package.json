@@ -1,6 +1,6 @@
 {
   "name": "windows-api-show-window",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Call ShowWindow from node via .NET",
   "main": "src/index.js",
   "dependencies": {
@@ -12,8 +12,9 @@
   },
   "scripts": {
     "postinstall": "npm run build",
-    "build": "./node_modules/.bin/tsc",
-    "test": "npm run build && start node test/index.js"
+    "build": "tsc",
+    "test": "npm run build && start node test/index.js",
+    "watch": "tsc --watch"
   },
   "files": [
     "src",

@@ -47,6 +47,7 @@ console.log("");
 }).then(promiseToWait)
 .then(() => {
 	console.log("Test finished");
-}).catch(err => {
+}).then(promiseToWait)
+.catch(err => {
 	console.error(err);
 });
