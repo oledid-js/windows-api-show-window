@@ -11,7 +11,6 @@
     "typescript": "^2.1.5"
   },
   "scripts": {
-    "preinstall": "npm prune",
     "postinstall": "npm run build",
     "build": "./node_modules/.bin/tsc",
     "test": "npm run build && start node test/index.js"
