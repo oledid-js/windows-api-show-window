@@ -1,5 +1,5 @@
 # windows-api-show-window
->> Call ShowWindow from node via .NET
+> Call ShowWindow from node via .NET
 
 ## What can I do with this?
 Hide, show, maximize or minimize a window where you know either the window's hWnd or the process' PID.
