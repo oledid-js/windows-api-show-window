@@ -1,0 +1,41 @@
+{
+  "name": "windows-api-show-window",
+  "version": "0.0.1",
+  "description": "Call ShowWindow from node via .NET",
+  "main": "src/index.js",
+  "dependencies": {
+    "edge": "^6.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^6.0.0",
+    "typescript": "^2.1.5"
+  },
+  "scripts": {
+    "preinstall": "npm prune",
+    "postinstall": "npm run build",
+    "build": "./node_modules/.bin/tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oledid/windows-api-show-window.git"
+  },
+  "keywords": [
+    "window",
+    "windows api",
+    "show window",
+    "hide window"
+  ],
+  "author": "Ole Morten Didriksen <code@oledid.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oledid/windows-api-show-window/issues"
+  },
+  "homepage": "https://github.com/oledid/windows-api-show-window#readme",
+  "os": [
+    "win32"
+  ]
+}

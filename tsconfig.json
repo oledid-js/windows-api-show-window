@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "es5",
+    "module": "commonjs",
+    "removeComments": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "lib": [ "es2015", "es2016" ],
+    "declaration": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": true,
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
