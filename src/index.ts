@@ -110,7 +110,11 @@ export enum ShowWindowArgs {
 }
 
 export function hideCurrentProcessWindow(): Promise<any> {
-	rejectNonWin32();
+	if (isNonWin32()) {
+		return new Promise((resolve, reject) => {
+			reject(invalidPlatformError);
+		});
+	}
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_HIDE);
@@ -118,7 +122,11 @@ export function hideCurrentProcessWindow(): Promise<any> {
 }
 
 export function showCurrentProcessWindow(): Promise<any> {
-	rejectNonWin32();
+	if (isNonWin32()) {
+		return new Promise((resolve, reject) => {
+			reject(invalidPlatformError);
+		});
+	}
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_SHOW);
@@ -126,7 +134,11 @@ export function showCurrentProcessWindow(): Promise<any> {
 }
 
 export function minimizeCurrentProcessWindow(): Promise<any> {
-	rejectNonWin32();
+	if (isNonWin32()) {
+		return new Promise((resolve, reject) => {
+			reject(invalidPlatformError);
+		});
+	}
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_MINIMIZE);
@@ -134,7 +146,11 @@ export function minimizeCurrentProcessWindow(): Promise<any> {
 }
 
 export function maximizeCurrentProcessWindow(): Promise<any> {
-	rejectNonWin32();
+	if (isNonWin32()) {
+		return new Promise((resolve, reject) => {
+			reject(invalidPlatformError);
+		});
+	}
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_MAXIMIZE);
@@ -142,7 +158,11 @@ export function maximizeCurrentProcessWindow(): Promise<any> {
 }
 
 export function restoreCurrentProcessWindow(): Promise<any> {
-	rejectNonWin32();
+	if (isNonWin32()) {
+		return new Promise((resolve, reject) => {
+			reject(invalidPlatformError);
+		});
+	}
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_RESTORE);
@@ -153,8 +173,11 @@ export function restoreCurrentProcessWindow(): Promise<any> {
  * Tries to get hWnd from pid via EnumWindows and GetWindowThreadProcessId
  */
 export function winApiGetHwndFromPid(pid: number = process.pid): Promise<number> {
-	rejectNonWin32();
 	return new Promise((resolve, reject) => {
+		if (isNonWin32()) {
+			reject(invalidPlatformError);
+			return;
+		}
 		user32.EnumWindows(getHwndEnumWindowProc, pid);
 		resolve(HWND);
 	});
@@ -165,15 +188,18 @@ export function winApiGetHwndFromPid(pid: number = process.pid): Promise<number>
  * https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
  */
 export function winApiShowWindow(hWnd: number, nCmdShow: ShowWindowArgs): Promise<any> {
-	rejectNonWin32();
 	return new Promise((resolve, reject) => {
+		if (isNonWin32()) {
+			reject(invalidPlatformError);
+			return;
+		}
 		user32.ShowWindow(hWnd, nCmdShow);
 		resolve();
 	});
 }
 
-function rejectNonWin32() {
-	if (os.platform() !== "win32") {
-		throw Error("Win32 only! :(");
-	}
+function isNonWin32() {
+	return os.platform() !== "win32";
 }
+
+const invalidPlatformError = "Invalid platform: win32 required";

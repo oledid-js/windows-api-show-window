@@ -1,6 +1,6 @@
 {
   "name": "windows-api-show-window",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Call ShowWindow from node via ffi",
   "main": "src/index.js",
   "scripts": {
