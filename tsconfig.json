@@ -4,7 +4,7 @@
     "target": "es5",
     "module": "commonjs",
     "removeComments": false,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": false,
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "baseUrl": ".",
@@ -16,7 +16,9 @@
     "noFallthroughCasesInSwitch": true,
     "strictNullChecks": true,
     "types": [
-      "node"
+      "node",
+      "ffi",
+      "ref"
     ]
   },
   "include": [

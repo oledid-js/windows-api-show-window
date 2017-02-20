@@ -1,0 +1,8 @@
+{
+  "jsRules": {
+    "linebreak-style": [
+      true,
+      "LF"
+    ]
+  }
+}

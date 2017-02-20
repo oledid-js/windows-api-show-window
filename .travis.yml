@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '6'
+deploy:
+  - provider: npm
+    email: code@oledid.com
+    skip_cleanup: true
+    api_key:
+      secure: mmRxgAGQJwMniz6ubJq4bLxzre+R0fakqRXF+a6nnsKApZPGv/pP0jXNa/E6NOHpwtjSTrcu03wBSb+nmMk426M+KglanoKZqR37nsm7ARC8JmjB3/GgkhhJ/eEo9Vq/2bxU+uOTTneEPUbM3LtlsvIuj3vMYlY64Xt86sgWXDJ6mJFYKih7XDAPP/pz9V+YSahZwPvh5DXgzvBXlbWVclVNa4JiCWrX58zEZFJ1MWABQprUrFMoVabELb1KCWz+qQ9XV2ekMd2B3kFVHXtgfZzuBSpT4nEWIf/rI4rrAjGxHJeUExRsEV+C8a60YKv0IrAOf19tffqJZ5GpzyGXeEEbmnslN21G6ma3iY+WWof3h9zZfWYcM7WODym0hqcb+NihcTNBRkQupbTbLtB7tfl7hc4XYP1LVhCbHwl8S+QmX7GyOZEXTw8oCCCpR9csfBdR7BhBjo/MhVIpcKxb2kQwTYZs63GNIfZ3a2WC5G87lOlc5JwgxpZILuY8ADrnNZfOI8NWw7uj0MyLjcYsZ1oTQwnOXcvkAl08iXC5x9sfArHtuZzFFYKwBkf5R9lH43shD8LwOdTx34DVfOzKNUP7qJFX3D9A6hohkANJSZwZxGHYywO/mdZxsRXAWDyP5WwXCaaridnYWCqYUUJGyew2or2YPTpifiZeVqCu2h4=
+    on:
+      tags: true
+  - provider: releases
+    api_key:
+        secure: KwshbwtyAgu3L2gNTC02jiZIRDw++SaWM0uOtCbMOIiZ5KfyN6Ne1JhOLK4K+VByZBRnakBDIC9XYTrFT75c1Em6L2cCYocFR3E2yH+mTPNMwuxrG9/a+njvcJV5mKdzwE4GXPI2q6M1q8PCc29BmoooQXiwfcy0/jRDbsmGiDj4cjuv9JKd0EdeCuh/NzmNy/ZDGnFMJ9vQ7ADQuC6XFmeNTg3G+r1YqFzFTXGkK8/77wzHfrtV8pirxXX9Cd4meCPJOKK/GdNOIXN808DEZwdmJGooGLUO4CqKviHhvtW4igPZkPZG4VqUZJ3FX8NbGFkZf/D8mxPjDjo1pWKtGr6uS33NYAp1j8jg7aLneNMdXgGKFqPTHa5QYAmRvaBC6bt07c0iXO5MkbgN9JyU0NF98sLtz0wr7U+F31fuwFNZRan5JDULOtejgdb2NqRtbRH4X9guN8NUjuIMSDE1i10gzJASrTifynrc3Y3HuUNGTRi/kX6P+LOl+t8AC5FzDFKONyRoAbqAfZG20HChaw7EBa9HEXdoCG45KdKojKGidV0D8bx6I8n2XMJ+90itP/1AxVq4FpmNZYkN0V2Ctm35Ck99oKeTxJNCeHoJDWF2V0XWURU0Xc8yj14RiGu26VA251KrrYGCKgRTeNfKrU/eFqMWJDxjKqoH4rxe9Iw=
+    skip_cleanup: true
+    on:
+      tags: true

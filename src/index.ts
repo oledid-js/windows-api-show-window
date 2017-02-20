@@ -1,7 +1,29 @@
 import * as path from "path";
-import * as edge from "edge";
+import * as ffi from "ffi";
+import * as os from "os";
+const ref = require("ref");
 
-const winApi = edge.func(path.join(__dirname, "winApi.cs"));
+let HWND = 0;
+
+const voidPtr = ref.refType(ref.types.void);
+const intPtr = ref.refType(ref.types.int);
+
+const user32 = ffi.Library("user32", {
+	ShowWindow: ["bool", ["int", "int"]],
+	EnumWindows: ["bool", [voidPtr, "int"]],
+	GetWindowThreadProcessId: ["uint", ["int", intPtr]]
+});
+
+const getHwndEnumWindowProc = ffi.Callback("bool", ["long", "int"], (hWnd, lParam) => {
+	const lpdwProcessId = ref.alloc(ref.types.int);
+	user32.GetWindowThreadProcessId(hWnd, lpdwProcessId);
+	const actualNumber = lpdwProcessId.deref();
+	if (actualNumber.toString() === lParam.toString()) {
+		HWND = hWnd;
+		return false;
+	}
+	return true;
+});
 
 export enum ShowWindowArgs {
 	/**
@@ -87,84 +109,71 @@ export enum ShowWindowArgs {
 	SW_FORCEMINIMIZE = 11
 }
 
-
 export function hideCurrentProcessWindow(): Promise<any> {
+	rejectNonWin32();
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_HIDE);
 		});
 }
 
-
 export function showCurrentProcessWindow(): Promise<any> {
+	rejectNonWin32();
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_SHOW);
-		})
+		});
 }
 
-
 export function minimizeCurrentProcessWindow(): Promise<any> {
+	rejectNonWin32();
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_MINIMIZE);
-		})
+		});
 }
 
-
 export function maximizeCurrentProcessWindow(): Promise<any> {
+	rejectNonWin32();
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_MAXIMIZE);
-		})
+		});
 }
 
-
 export function restoreCurrentProcessWindow(): Promise<any> {
+	rejectNonWin32();
 	return winApiGetHwndFromPid()
 		.then(hWnd => {
 			return winApiShowWindow(hWnd, ShowWindowArgs.SW_RESTORE);
-		})
+		});
 }
-
 
 /**
  * Tries to get hWnd from pid via EnumWindows and GetWindowThreadProcessId
  */
 export function winApiGetHwndFromPid(pid: number = process.pid): Promise<number> {
+	rejectNonWin32();
 	return new Promise((resolve, reject) => {
-		let hWnd = undefined;
-		winApi({
-			method: "GetWindowThreadProcessId",
-			pid: pid
-		}, (error, result) => {
-			if (error) {
-				reject(error);
-				return;
-			}
-			hWnd = result;
-		});
-		resolve(hWnd);
+		user32.EnumWindows(getHwndEnumWindowProc, pid);
+		resolve(HWND);
 	});
 }
-
 
 /**
  * Calls ShowWindow
  * https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548(v=vs.85).aspx
  */
 export function winApiShowWindow(hWnd: number, nCmdShow: ShowWindowArgs): Promise<any> {
+	rejectNonWin32();
 	return new Promise((resolve, reject) => {
-		winApi({
-			method: "ShowWindow",
-			hwnd: hWnd,
-			ncmdshow: nCmdShow
-		}, error => {
-			if (error) {
-				reject(error);
-				return;
-			}
-			resolve();
-		});
+		user32.ShowWindow(hWnd, nCmdShow);
+		resolve();
 	});
+}
+
+function rejectNonWin32() {
+	if (os.platform() !== "win32") {
+		throw Error("Win32 only! :(");
+	}
 }

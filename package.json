@@ -1,20 +1,14 @@
 {
   "name": "windows-api-show-window",
-  "version": "0.0.3",
-  "description": "Call ShowWindow from node via .NET",
+  "version": "0.1.0",
+  "description": "Call ShowWindow from node via ffi",
   "main": "src/index.js",
-  "dependencies": {
-    "edge": "^6.5.1"
-  },
-  "devDependencies": {
-    "@types/node": "^6.0.0",
-    "typescript": "^2.1.5"
-  },
   "scripts": {
-    "postinstall": "npm run build",
-    "build": "tsc",
-    "test": "npm run build && start node test/index.js",
-    "watch": "tsc --watch"
+    "build": "tsc --newline lf",
+    "pretest": "npm run build",
+    "test": "npm run lint && echo Run manual test with ctrl + r: node.exe [path-to-repo]/test/index.js",
+    "lint": "tslint -t stylish -c tslint.json -e **/*.d.ts src/**/*.ts test/**/*.ts && tslint -t stylish -c jslint.json src/**/*.js test/**/*.js",
+    "prepublish": "in-publish && npm test || not-in-publish"
   },
   "files": [
     "src",
@@ -22,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oledid/windows-api-show-window.git"
+    "url": "git+https://github.com/oledid-js/windows-api-show-window.git"
   },
   "keywords": [
     "window",
@@ -33,10 +27,18 @@
   "author": "Ole Morten Didriksen <code@oledid.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/oledid/windows-api-show-window/issues"
+    "url": "https://github.com/oledid-js/windows-api-show-window/issues"
   },
-  "homepage": "https://github.com/oledid/windows-api-show-window#readme",
-  "os": [
-    "win32"
-  ]
+  "homepage": "https://github.com/oledid-js/windows-api-show-window#readme",
+  "dependencies": {
+    "ffi": "^2.2.0",
+    "ref": "^1.3.4"
+  },
+  "devDependencies": {
+    "@types/ffi": "0.0.19",
+    "@types/node": "^6.0.0",
+    "@types/ref": "0.0.28",
+    "in-publish": "^2.0.0",
+    "typescript": "^2.1.5"
+  }
 }
