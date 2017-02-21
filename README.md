@@ -69,6 +69,10 @@ api.winApiShowWindow(hWnd, api.SW_HIDE).then(() => {
 });
 ```
 
+## Troubleshooting
+If node-gyp fails:
+Check out the [node-gyp documentation](https://github.com/nodejs/node-gyp) and [felixrieseberg/windows-build-tools](https://github.com/felixrieseberg/windows-build-tools)
+
 ## Relevant
 * [Windows Api ShowWindow documentation](https://msdn.microsoft.com/en-us/library/windows/desktop/ms633548.aspx)
 * [sindresorhus/module-requests issue](https://github.com/sindresorhus/module-requests/issues/81)
