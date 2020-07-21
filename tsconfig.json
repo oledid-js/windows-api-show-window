@@ -17,8 +17,8 @@
     "strictNullChecks": true,
     "types": [
       "node",
-      "ffi",
-      "ref"
+      "ffi-napi",
+      "ref-napi"
     ]
   },
   "include": [

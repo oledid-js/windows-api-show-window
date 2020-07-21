@@ -1,7 +1,10 @@
-import * as path from "path";
-import * as ffi from "ffi";
+import * as ffi from "ffi-napi";
 import * as os from "os";
-const ref = require("ref");
+import * as ref from "ref-napi";
+
+declare module "ref-napi" {
+	export function deref(buffer?: Buffer): any;
+}
 
 let HWND = 0;
 
