@@ -1,5 +1,5 @@
 # windows-api-show-window [![Build Status](https://travis-ci.org/oledid-js/windows-api-show-window.svg?branch=master)](https://travis-ci.org/oledid-js/windows-api-show-window) [![npm](https://img.shields.io/npm/dt/windows-api-show-window.svg)](https://www.npmjs.com/package/windows-api-show-window) [![npm](https://img.shields.io/npm/v/windows-api-show-window.svg)](https://www.npmjs.com/package/windows-api-show-window)
-Call ShowWindow from node via [ffi](https://github.com/node-ffi/node-ffi)
+Call ShowWindow from node via [ffi-napi](https://github.com/node-ffi-napi/node-ffi-napi)
 
 Win32 only!
 

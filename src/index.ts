@@ -2,10 +2,6 @@ import * as ffi from "ffi-napi";
 import * as os from "os";
 import * as ref from "ref-napi";
 
-declare module "ref-napi" {
-	export function deref(buffer?: Buffer): any;
-}
-
 let HWND = 0;
 
 const voidPtr = ref.refType(ref.types.void);
@@ -20,6 +16,7 @@ const user32 = ffi.Library("user32", {
 const getHwndEnumWindowProc = ffi.Callback("bool", ["long", "int"], (hWnd, lParam) => {
 	const lpdwProcessId = ref.alloc(ref.types.int);
 	user32.GetWindowThreadProcessId(hWnd, lpdwProcessId);
+	// @ts-ignore: just a missing type definition
 	const actualNumber = lpdwProcessId.deref();
 	if (actualNumber.toString() === lParam.toString()) {
 		HWND = hWnd;

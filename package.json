@@ -1,13 +1,12 @@
 {
   "name": "windows-api-show-window",
-  "version": "0.1.2",
-  "description": "Call ShowWindow from node via ffi",
+  "version": "0.2.0",
+  "description": "Call ShowWindow from node via ffi-napi",
   "main": "src/index.js",
   "scripts": {
     "build": "tsc --newline lf",
     "pretest": "npm run build",
-    "test": "npm run lint && echo Run manual test with ctrl + r: node.exe [path-to-repo]/test/index.js",
-    "lint": "tslint -t stylish -c tslint.json -e **/*.d.ts src/**/*.ts test/**/*.ts && tslint -t stylish -c jslint.json src/**/*.js test/**/*.js",
+    "test": "echo Run manual test with ctrl + r: node.exe [path-to-repo]/test/index.js",
     "prepublish": "in-publish && npm test || not-in-publish"
   },
   "files": [
@@ -24,8 +23,12 @@
     "show window",
     "hide window"
   ],
-  "author": "Ole Morten Didriksen <code@oledid.com>",
+  "author": "Ole Morten Didriksen <code@oledid.com> (https://github.com/oledid)",
   "license": "MIT",
+  "contributors": [
+    "Ole Morten Didriksen <code@oledid.com> (https://github.com/oledid)",
+    "bisubus (https://github.com/bisubus)"
+  ],
   "bugs": {
     "url": "https://github.com/oledid-js/windows-api-show-window/issues"
   },
@@ -39,7 +42,6 @@
     "@types/node": "^6.0.0",
     "@types/ref-napi": "1.4.1",
     "in-publish": "^2.0.0",
-    "tslint": "^4.4.2",
     "typescript": "^2.1.6"
   }
 }
